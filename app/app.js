@@ -32,6 +32,8 @@ if (shotChecked) earned = new Set(shotChecked.split(',').map(Number).filter((n) 
 let spoiler = saved.spoiler === true || params.get('spoiler') === '1';
 let filter = params.get('filter') || 'all';
 let query = '';
+// Jump to the ?open trophy only on the first render (see render()).
+let scrolledToOpen = false;
 
 function save() {
   try { localStorage.setItem(KEY, JSON.stringify({ earned: [...earned], spoiler })); } catch { /* private mode */ }
@@ -163,8 +165,13 @@ function render() {
     : `Showing ${shown.length} of ${trophies.length} trophies · ${n} earned`;
   filtersEl.querySelectorAll('button').forEach((b) => b.classList.toggle('active', b.dataset.kind === filter));
   spoilerInput.checked = spoiler;
-  const open = params.get('open');
-  if (open) document.getElementById(`trophy-${open}`)?.scrollIntoView({ block: 'center' });
+  // Jump to the ?open trophy only on the first render: re-rendering after a checkbox
+  // toggle must not yank the page back to it.
+  if (!scrolledToOpen) {
+    scrolledToOpen = true;
+    const open = params.get('open');
+    if (open) document.getElementById(`trophy-${open}`)?.scrollIntoView({ block: 'center' });
+  }
 }
 
 filtersEl.addEventListener('click', (e) => {
