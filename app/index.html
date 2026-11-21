@@ -1,0 +1,57 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>GTA VI — Trophy Guide &amp; Tracker</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header class="hero">
+  <div class="hero-text">
+    <p class="kicker">Grand Theft Auto VI &middot; PlayStation 5 &middot; all 55 trophies offline</p>
+    <h1>GTA VI Trophy Guide &amp; Tracker</h1>
+    <p class="lede">Every trophy with its official name, description and grade, a guide in our own words with its sources, a platinum roadmap, and a checklist that saves in your browser. No online trophies — the whole list is earned in one playthrough, roughly 200&ndash;250 hours.</p>
+  </div>
+  <div class="progress-card" id="progressCard">
+    <p class="progress-big"><span id="earnedCount">0</span><span class="of"> / 55</span></p>
+    <div class="bar"><div class="bar-fill" id="barFill" style="width:0%"></div></div>
+    <p class="progress-note" id="progressNote">0% — the platinum is a long road. Start with the story.</p>
+    <p class="grade-counts" id="gradeCounts"></p>
+  </div>
+</header>
+
+<section class="roadmap" id="roadmap">
+  <h2>Roadmap to the platinum</h2>
+  <p class="section-note">Four stages, in order. Story first, collectibles as you go, the long grinds third, 100% completion last. Only one trophy is reported as possibly missable — it is flagged below.</p>
+  <div class="stages" id="stages"></div>
+</section>
+
+<section class="controls">
+  <div class="filters" id="filters" role="group" aria-label="Filter trophies by kind">
+    <button type="button" data-kind="all" class="active">All 55</button>
+    <button type="button" data-kind="story">Story</button>
+    <button type="button" data-kind="missable">Missable</button>
+    <button type="button" data-kind="collectibles">Collectibles</button>
+    <button type="button" data-kind="activities">Activities</button>
+  </div>
+  <label class="search">Search <input id="search" type="search" placeholder="Trophy, mission or keyword…" autocomplete="off"></label>
+  <label class="spoiler"><input id="spoiler" type="checkbox"> Spoiler-safe: hide story trophies until earned</label>
+  <div class="io">
+    <button id="export" type="button">Export progress</button>
+    <label class="import">Import progress <input id="import" type="file" accept="application/json"></label>
+    <button id="reset" type="button">Reset progress</button>
+  </div>
+</section>
+
+<p class="stats" id="stats"></p>
+<main class="list" id="list"></main>
+
+<footer>
+  <h2>Sources &amp; notes</h2>
+  <p>Official trophy names, descriptions and grades are as PlayStation publishes them, cross-checked on Exophase and PSNProfiles (18 Nov 2026). Each guide below names the published guides it draws on — see the source links beside every trophy. Counts that matter: 42 Shooting Range challenges, 14 Top Fun locations, 18 meditation spots, 9 activity types, 8 stranger strands, 18 card sets, 50 of 80 challenges, 250 stunts for the trophy and 300 for 100%. Cheats disable trophies and saving, so leave cheats off for a trophy run. This guide is fan-made and not affiliated with Rockstar Games; no Rockstar logo or artwork is used.</p>
+  <p id="sourceList"></p>
+</footer>
+<script type="module" src="app.js"></script>
+</body>
+</html>
