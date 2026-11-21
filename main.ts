@@ -11,7 +11,7 @@
 // Outside the grader's container, MAKEFUN_OUTPUT_DIR stands in for /output:
 //   mkdir -p out && MAKEFUN_OUTPUT_DIR=out node main.ts
 
-import { cpSync, existsSync, mkdirSync, writeFileSync } from 'node:fs';
+import { cpSync, existsSync, mkdirSync, readdirSync, writeFileSync } from 'node:fs';
 import { join } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { buildDossier } from './vendor/makefun-frontend.ts';
@@ -25,7 +25,13 @@ if (!existsSync(join(here, 'app', 'data', 'trophies.json'))) throw new Error('ap
 mkdirSync(out, { recursive: true });
 cpSync(join(here, 'app'), join(out, 'app'), { recursive: true });
 mkdirSync(join(out, 'screenshots'), { recursive: true });
-if (existsSync(join(here, 'screenshots'))) cpSync(join(here, 'screenshots'), join(out, 'screenshots'), { recursive: true });
+// Fail fast when the screenshots are missing instead of handing in a dossier with
+// none: the entry needs 3-4 of them, and a silent skip would only surface at grading.
+const shotDir = join(here, 'screenshots');
+if (!existsSync(shotDir)) throw new Error('screenshots/ is missing: the entry needs 3-4 screenshots');
+const shots = readdirSync(shotDir).filter((f) => /\.(png|jpe?g)$/i.test(f));
+if (shots.length < 3) throw new Error(`screenshots/ holds ${shots.length} image(s): the entry needs 3-4 screenshots`);
+cpSync(shotDir, join(out, 'screenshots'), { recursive: true });
 
 // The scorer's own caps: only text_max_bytes shapes the bytes; the others refuse an
 // entry the scorer would refuse (more than 4 screenshots or one over 256 KiB; more
